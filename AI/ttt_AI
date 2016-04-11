@@ -1,0 +1,65 @@
+function score(board){
+
+  if (board.isDraw()){
+    return 0;
+  }//returns score of 0 for a draw
+
+  else if (board.playerWin() === 'O'){
+    return -1;
+  }//returns score of -1 if the minimizing player O wins
+
+  else if (board.playerWin() === 'X'){
+    return 1;
+  }// returns score of 1 if the maximizing player X wins 
+
+  else {
+    return null;
+  }// returns null score if there is an invalid winner
+
+}
+
+function getBestOutcome(board,isMaximizingPlayer){
+  var currentScore = score(board);
+  if (currentScore = 0){
+    return currentScore;
+  }
+
+  else if (currentScore = 1) {
+    return currentScore;
+  }
+
+  else if (currentScore = -1) {
+    return currentScore;
+  }
+
+    else{
+      var bestScore = -Infinity;
+      var worstScore = Infinity;
+
+      for(var row = 0; row<board.rows; row++){
+        
+        for (var column = 0; column<board.columns; column++){
+          if(board.isValidMove(row,column)){
+            board.makeMove(row,column);
+            var newBoard = board.copyModel(row,column);
+
+            if (isMaximizingPlayer) {
+              var x = getBestOutcome(newBoard,false);
+
+              if(x > bestScore){
+                bestScore = x;
+              }
+            }
+
+            else if(!isMaximizingPlayer){
+              var x = getBestOutcome(newBoard,true);
+              if(x<worstScore){
+                worstScore = x;
+              }
+            }        
+        }
+      }
+      return isMaximizingPlayer? bestScore:worstScore;
+    }
+  }
+}
