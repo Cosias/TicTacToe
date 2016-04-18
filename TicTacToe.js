@@ -25,11 +25,11 @@ function createTable(rows,columns)
 		//	
 
 		tableCell.className= 'game-grid-cell';
-		tableCell.addEventListener("click",function(){
-			alert("you clicked me");
-			//setCellText(this, "X");
-			//makeMove(0,1,"X");
-			});
+		// tableCell.addEventListener("click",function(){
+		// 	alert("you clicked me");
+		// 	//setCellText(this, "X");
+		// 	//makeMove(0,1,"X");
+		// 	});
 		
 		tableRow.appendChild(tableCell);
 		
