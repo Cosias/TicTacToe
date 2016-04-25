@@ -1,8 +1,25 @@
 .game-grid-cell {
- 	width: 50px;
-	height: 50px;
+ 	width: 100px;
+	height: 100px;
 	background-color:  #DDD;
 	border: 1px solid black;
 	font-family: verdana, sans-serrif;
 	text-align: center
+}
+
+.choosePlayer{
+	font-size: 25px;
+	font-family: verdana,sans-serif;
+	color:blue;
+	text-align: center; 
+}
+
+#TTT_Head{
+	text-align: center;
+}
+
+#dynamicTable{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
 }

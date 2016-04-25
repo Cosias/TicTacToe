@@ -1,4 +1,5 @@
 var myTable = document.getElementById("dynamicTable");
+var startGame = document.getElementById("startGame");
 
 
 function createTable(rows,columns)
@@ -14,16 +15,14 @@ function createTable(rows,columns)
 	{
 		var tableCell = document.createElement('TD');	
 
-
 		// TABLE CELL STYLING LATER UPDATED IN TTT-STYLES.CSS 
-		tableCell.style.width = '50px';
-		tableCell.style.height = '50px';
-		tableCell.style.bgColor= '#DDD';
-		tableCell.style.border = '2px solid black';
-		tableCell.style.fontFamily = 'verdana, sans-serrif';
-		tableCell.style.textAlign = "center";
-		//	
-
+		// tableCell.style.width = '50px';
+		// tableCell.style.height = '50px';
+		// tableCell.style.bgColor= '#DDD';
+		// tableCell.style.border = '2px solid black';
+		// tableCell.style.fontFamily = 'verdana, sans-serrif';
+		// tableCell.style.textAlign = "center";
+		
 		tableCell.className= 'game-grid-cell';
 		// tableCell.addEventListener("click",function(){
 		// 	alert("you clicked me");
@@ -51,17 +50,20 @@ createTable(3,3);
 // 	}
 // }
 
+startGame.addEventListener("onclick",function(){move()});
+// newGame.addEventListener("onclick",newestModel.newGame());
 
-function setCellText(cell,string) //(row,column,string)
+function setCellText(row,column,string)//(cell,string)
 {
-	// myTable.rows[row].cells[column].textContent = string;
-	cell.textContent = string;
+	myTable.rows[row].cells[column].textContent = string;
+	// cell.textContent = string;
 }
 
+function move(){
 setCellText(1,2,"X");
 setCellText(0,0,"O");
 setCellText(2,1,'X');
-
+}
 // document.getElementById("dynamicTable").addEventListener("click",alert("I've been clicked"));
 // function View(model,callback){
 // 	callback(tableCell,row,column);
