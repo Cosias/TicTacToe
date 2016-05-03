@@ -1,4 +1,7 @@
+
 function score(board) {
+  var humanPlayer = board.players[0];
+  var aiPlayer = board.players[1];
 
   var scoreObj ={
     row:0,
@@ -10,11 +13,11 @@ function score(board) {
     scoreObj.val = 0;
     return scoreObj;
   } //returns score of 0 for a draw
-  else if (board.playerWin() === 'O') {
+  else if (board.playerWin() === humanPlayer) {
     scoreObj.val = -1;
     return scoreObj;
   } //returns score of -1 if the minimizing player O wins
-  else if (board.playerWin() === 'X') {
+  else if (board.playerWin() === aiPlayer) {
     scoreObj.val = 1;
     return scoreObj;
   }else{
@@ -29,9 +32,8 @@ function score(board) {
 
 function getBestOutcome(board, isMaximizingPlayer) {
   var currentScore = score(board);
-  //console.log(currentScore);
-
-  if (currentScore.val === 0) {
+  console.log(currentScore);
+   if (currentScore.val === 0) {
     // console.log("Reached 0");
     return currentScore;
   } else if (currentScore.val === 1) {
@@ -41,7 +43,20 @@ function getBestOutcome(board, isMaximizingPlayer) {
     // console.log("Reached -1");
     return currentScore;
   } else {
-    
+  var humanPlayer = board.players[0];
+  var aiPlayer = board.players[1];
+
+  // if(board.isDraw()){
+  //   return 0;
+  // }//Game ends in draw 
+  // else if (board.playerWin() === humanPlayer){
+  //   return -1;
+  // }//Human player wins
+  // else if (board.playerWin() === aiPlayer){
+  //   return 1;
+  // }//Ai player wins
+  // else{
+  
     if (isMaximizingPlayer){
     
     var bestMove = {
@@ -82,7 +97,7 @@ function getBestOutcome(board, isMaximizingPlayer) {
 
           if (isMaximizingPlayer) {
 
-            newBoard.makeMove(row, column, "X");
+            newBoard.makeMove(row, column, aiPlayer);
              tempMove = getBestOutcome(newBoard, false);
              console.log(tempMove.val);
 
@@ -96,7 +111,7 @@ function getBestOutcome(board, isMaximizingPlayer) {
             }
           } else if (!isMaximizingPlayer) {
             
-            newBoard.makeMove(row, column, "O");
+            newBoard.makeMove(row, column, humanPlayer);
             tempMove = getBestOutcome(newBoard, true);
             console.log(tempMove.val);
             if (tempMove.val < bestMove.val) {
@@ -113,23 +128,27 @@ function getBestOutcome(board, isMaximizingPlayer) {
   }
 }
 
-var newestModel = newModel.copyModel();
+var newestModel = new Model(3,3);
+
 
 newestModel.board = [
-  ['X', '', 'O'],
-  ['', 'O', 'X'],
-  ['X', 'O', 'X']
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', '']
 ];
 
-var newMod = newestModel.copyModel();
+newestModel.playerTurn = 'X';
+newestModel.moves = 0;
+newestModel.players = ['X','O'];
+
+// var newMod = newestModel.copyModel();
 // console.log(newestModel);
 // console.log(newestModel.board);
 // console.log(newestModel.playerWin());
 // console.log(newestModel.isGameOver());
 
 // var bestMove = getBestOutcome(newestModel,true);
-console.log(newestModel.board);
-console.log(newestModel.isGameOver());
-
-console.log(getBestOutcome(newestModel, true));
+// console.log(newestModel.board);
+// console.log(newestModel.isGameOver());
+// console.log(getBestOutcome(newestModel, true));
 

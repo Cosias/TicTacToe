@@ -50,7 +50,7 @@ createTable(3,3);
 // 	}
 // }
 
-startGame.addEventListener("onclick",function(){move()});
+// startGame.addEventListener("onclick",function(){move()});
 // newGame.addEventListener("onclick",newestModel.newGame());
 
 function setCellText(row,column,string)//(cell,string)

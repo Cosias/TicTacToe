@@ -1,27 +1,30 @@
-function score(board) {
+function score(gameModel) {
 	
-  if (board.isDraw()) {
+  if (gameModel.board.isDraw()) {
    return 2; 
   } 
-  else if (board.playerWin() === board.players[1]) {
+  else if (gameModel.board.playerWin() === gameModel.players[1]) {
     scoreObj.val = 3;
   } 
-  else if (board.playerWin() === board.players[0]) {
+  else if (gameModel.board.playerWin() === gameModel.players[0]) {
     scoreObj.val = 1;
   }else{
   	return 0;
   }
 }// returns a score value for the current board status(3 ai win, 2 draw, 1 ai loss, 0 score undetermined)
 
-var gameBoardList = {
+function gameBoardList(Model){
+	var gameBoardList = {
 	key: JSON.stringify(Model),
 	val: {
 		parentModel:[],
 		isAiTurn: true,
 		point: score(Model);
 		//get the value of the currentModel in terms of (0,1,2, or 3) 				
+		};
 	};
-};
+	return gameBoardList;
+}//takes in the the games model and returns an object containing a key and a value 
 
 function mapper(gameBoardList) {
   // currentGameBoard consists of a list of objects in the form {key: fileName, value: line}

@@ -31,7 +31,7 @@ var model = {
   }, //returns true if the game board is flled without a valid winner 
 
   isValidMove: function(row, column) {
-    if (this.board[row][column] === 'X' || this.board[row][column] === 'O') {
+    if (this.board[row][column] !== '') {
       return false;
     } else {
       return true;
@@ -124,5 +124,156 @@ Model.prototype = model;
 var newModel = new Model(3, 3);
 newModel.newPlayer("X");
 newModel.newPlayer("O");
+
+
+// function score(board) {
+//   var humanPlayer = board.players[0];
+//   var aiPlayer = board.players[1];
+
+//   var scoreObj ={
+//     row:0,
+//     col:0,
+//     val:null
+//   };
+  
+//   if (board.isDraw()) {
+//     scoreObj.val = 0;
+//     return scoreObj;
+//   } //returns score of 0 for a draw
+//   else if (board.playerWin() === humanPlayer) {
+//     scoreObj.val = -1;
+//     return scoreObj;
+//   } //returns score of -1 if the minimizing player O wins
+//   else if (board.playerWin() === aiPlayer) {
+//     scoreObj.val = 1;
+//     return scoreObj;
+//   }else{
+//     return scoreObj;
+//   }
+//   // returns score of 1 if the maximizing player X wins 
+//   //else {
+//   //  return null;
+//   //} // returns null score if there is an invalid winner or no winner
+
+// }
+
+// function getBestOutcome(board, isMaximizingPlayer) {
+//   var currentScore = score(board);
+//   console.log(currentScore);
+//    if (currentScore.val === 0) {
+//     // console.log("Reached 0");
+//     return currentScore;
+//   } else if (currentScore.val === 1) {
+//     // console.log("reached 1");
+//     return currentScore;
+//   } else if (currentScore.val === -1) {
+//     // console.log("Reached -1");
+//     return currentScore;
+//   } else {
+//   var humanPlayer = board.players[0];
+//   var aiPlayer = board.players[1];
+
+//   // if(board.isDraw()){
+//   //   return 0;
+//   // }//Game ends in draw 
+//   // else if (board.playerWin() === humanPlayer){
+//   //   return -1;
+//   // }//Human player wins
+//   // else if (board.playerWin() === aiPlayer){
+//   //   return 1;
+//   // }//Ai player wins
+//   // else{
+  
+//     if (isMaximizingPlayer){
+    
+//     var bestMove = {
+//       row:0,
+//       col:0,
+//       val:-Infinity
+//     };
+    
+//     var tempMove = {
+//       row:0,
+//       col:0,
+//       val:-Infinity
+//      };
+//     }
+//     else if (!isMaximizingPlayer){
+      
+//     var bestMove = {
+//       row: 0,
+//       col: 0,
+//       val: Infinity
+//     };
+    
+//     var tempMove = {
+//       row: 0,
+//       col: 0,
+//       val: Infinity
+//     };
+//     }
+//     // object that holds the row and col of a move and the score val at that position 
+
+//     for (var row = 0; row < board.rows; row++) {
+
+//       for (var column = 0; column < board.columns; column++) {
+       
+//         if (board.isValidMove(row, column)) {
+
+//           var newBoard = board.copyModel();
+
+//           if (isMaximizingPlayer) {
+
+//             newBoard.makeMove(row, column, aiPlayer);
+//              tempMove = getBestOutcome(newBoard, false);
+//              console.log(tempMove.val);
+
+//             if (tempMove.val > bestMove.val) {
+//               bestMove = tempMove;
+//               //bestMove = [row, column];
+//               bestMove.row = row;
+//               bestMove.col = column;
+//               //move.val = bestScore;
+//               //bestMove = x;
+//             }
+//           } else if (!isMaximizingPlayer) {
+            
+//             newBoard.makeMove(row, column, humanPlayer);
+//             tempMove = getBestOutcome(newBoard, true);
+//             console.log(tempMove.val);
+//             if (tempMove.val < bestMove.val) {
+//               bestMove = tempMove;
+
+//               bestMove.row = row;
+//               bestMove.col = column;
+//             }
+//           }
+//         }
+//       }
+//     }
+//     return bestMove;
+//   }
+// }
+
+// var newestModel = new Model(3,3);
+
+
+// newestModel.board = [
+//   ['X', '', 'O'],
+//   ['', 'O', 'X'],
+//   ['X', 'O', 'X']
+// ];
+
+// // var newMod = newestModel.copyModel();
+// // console.log(newestModel);
+// // console.log(newestModel.board);
+// // console.log(newestModel.playerWin());
+// // console.log(newestModel.isGameOver());
+
+// // var bestMove = getBestOutcome(newestModel,true);
+// console.log(newestModel.board);
+// console.log(newestModel.isGameOver());
+// console.log(getBestOutcome(newestModel, true));
+
 
 
