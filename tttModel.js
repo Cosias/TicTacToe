@@ -81,6 +81,8 @@ var model = {
         this.board[i][j] = '';
       }
     }
+    this.playerTurn= this.players[0]
+    this.moves = 0;
   },
 
   getPlayer: function(row, column) {

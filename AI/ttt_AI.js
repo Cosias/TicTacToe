@@ -22,41 +22,25 @@ function score(board) {
     return scoreObj;
   }else{
     return scoreObj;
-  }
-  // returns score of 1 if the maximizing player X wins 
-  //else {
-  //  return null;
-  //} // returns null score if there is an invalid winner or no winner
+  } // returns null score if there is an invalid winner or no winner
 
 }
 
 function getBestOutcome(board, isMaximizingPlayer) {
   var currentScore = score(board);
-  console.log(currentScore);
    if (currentScore.val === 0) {
-    // console.log("Reached 0");
     return currentScore;
-  } else if (currentScore.val === 1) {
-    // console.log("reached 1");
+  } 
+  else if (currentScore.val === 1) {
     return currentScore;
-  } else if (currentScore.val === -1) {
-    // console.log("Reached -1");
+  }
+   else if (currentScore.val === -1) {
     return currentScore;
-  } else {
+  } 
+  else {
   var humanPlayer = board.players[0];
   var aiPlayer = board.players[1];
 
-  // if(board.isDraw()){
-  //   return 0;
-  // }//Game ends in draw 
-  // else if (board.playerWin() === humanPlayer){
-  //   return -1;
-  // }//Human player wins
-  // else if (board.playerWin() === aiPlayer){
-  //   return 1;
-  // }//Ai player wins
-  // else{
-  
     if (isMaximizingPlayer){
     
     var bestMove = {
@@ -85,7 +69,6 @@ function getBestOutcome(board, isMaximizingPlayer) {
       val: Infinity
     };
     }
-    // object that holds the row and col of a move and the score val at that position 
 
     for (var row = 0; row < board.rows; row++) {
 
@@ -99,21 +82,19 @@ function getBestOutcome(board, isMaximizingPlayer) {
 
             newBoard.makeMove(row, column, aiPlayer);
              tempMove = getBestOutcome(newBoard, false);
-             console.log(tempMove.val);
 
             if (tempMove.val > bestMove.val) {
               bestMove = tempMove;
-              //bestMove = [row, column];
+        
               bestMove.row = row;
               bestMove.col = column;
-              //move.val = bestScore;
-              //bestMove = x;
+
             }
           } else if (!isMaximizingPlayer) {
             
             newBoard.makeMove(row, column, humanPlayer);
             tempMove = getBestOutcome(newBoard, true);
-            console.log(tempMove.val);
+            
             if (tempMove.val < bestMove.val) {
               bestMove = tempMove;
 

@@ -9,6 +9,7 @@ function startNewGame(){
 		newestModel.newGame();
 		console.log(newestModel.board);
 		updateView();
+		// console.log(newestModel);
 
 	})
 	}
@@ -67,9 +68,10 @@ function clickHandler(){
 
 	if (newestModel.playerTurn === newestModel.players[1]) {
 	// console.log("I am doing work");
-	var aiMove = getBestOutcome(newestModel,true);
-	newestModel.makeMove(aiMove.row,aiMove.col,newestModel.players[1]);
-	updateView();
+	// var aiMove = getBestOutcome(newestModel,true);
+	// newestModel.makeMove(aiMove.row,aiMove.col,newestModel.players[1]);
+	// updateView();
+	aiMove();
 
 if (newestModel.isGameOver() && !(newestModel.isDraw())) {
 		alert("Congratulations Player " +newestModel.playerWin() + " Wins!!!")
@@ -93,6 +95,12 @@ function updateView(){
 			setCellText(r,c,newestModel.board[r][c])
 		}
 	}
+}
+
+function aiMove(){
+	var aiMove = getBestOutcome(newestModel,true);
+	newestModel.makeMove(aiMove.row,aiMove.col,newestModel.players[1]);
+	updateView();
 }
 
 // if (newestModel.playerTurn === newestModel.players[1]) {
