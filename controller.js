@@ -10,7 +10,6 @@ function startNewGame(){
 		console.log(newestModel.board);
 		updateView();
 		// console.log(newestModel);
-
 	})
 	}
 
@@ -74,7 +73,11 @@ function clickHandler(){
 	aiMove();
 
 if (newestModel.isGameOver() && !(newestModel.isDraw())) {
+		if(newestModel.playerWin()===newestModel.players[0]){
 		alert("Congratulations Player " +newestModel.playerWin() + " Wins!!!")
+	}else if(newestModel.playerWin()===newestModel.players[1]){
+		alert("Sorry, You Lose!!!")
+	}
 	}else if (newestModel.isDraw()){
 		alert("This Game Ended In a Draw!!!")
 	}
