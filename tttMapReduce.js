@@ -1,17 +1,28 @@
-function score(gameModel) {
+function score(board) {
 	
-  if (gameModel.board.isDraw()) {
+  if (board.isDraw()) {
    return 2; 
   } 
-  else if (gameModel.board.playerWin() === gameModel.players[1]) {
-    scoreObj.val = 3;
+  else if (board.playerWin() === board.players[1]) {
+    return  3;
   } 
-  else if (gameModel.board.playerWin() === gameModel.players[0]) {
-    scoreObj.val = 1;
+  else if (board.playerWin() === board.players[0]) {
+    return 1;
   }else{
   	return 0;
   }
 }// returns a score value for the current board status(3 ai win, 2 draw, 1 ai loss, 0 score undetermined)
+
+
+// var gameBoardList = {
+// 	key: JSON.stringify(newestModel.board),
+// 	val: {
+// 		parentModel:[],
+// 		isAiTurn: true,
+// 		point: score(newestModel)
+// 		//get the value of the currentModel in terms of (0,1,2, or 3) 				
+// 	}
+// };
 
 function gameBoardList(Model){
 	var gameBoardList = {
@@ -19,37 +30,57 @@ function gameBoardList(Model){
 	val: {
 		parentModel:[],
 		isAiTurn: true,
-		point: score(Model);
+		point: score(Model)
 		//get the value of the currentModel in terms of (0,1,2, or 3) 				
-		};
+		}
 	};
 	return gameBoardList;
 }//takes in the the games model and returns an object containing a key and a value 
 
-function mapper(gameBoardList) {
-  // currentGameBoard consists of a list of objects in the form {key: fileName, value: line}
+
+var list = [gameBoardList(newestModel)];
+
+
+function mapper1(gameBoardList) {
   return gameBoardList.map(function(gameBoard){
+  	// console.log(gameBoard.key);
+  	// console.log('\n');
+  	var currentBoard = JSON.parse(gameBoard.key);
+  	
+  	var childBoard = [];
+	
+	
 
-  	var currentBoard = JSON.parse(gameBoardList.key);
-  	Model.prototype.copyBoard.call(); 	
-  	// var currentBoard = gameBoard.key.Model.prototype.copyBoard.call;
-  	// var boardString = JSON.parse(currentBoard);
-     
-    var newBoard = [];
-
-    var line = gameBoard.value;
-    words = line.split(" ");
-    return words.map(function(word) {
-        return {key: word, value: "1"}; // each word contributes 1 to the total
-    });
-  });
+	for(var r =0; r< 3; r++){
+		for(var c=0; c <3; c++){
+			var mod = Model.prototype.copyModel.call(currentBoard);
+			// var player = gameBoardList[0].val.isAiTurn;
+			// if(player){
+			// 	player = newestModel.players[1];
+			// }
+			// else if(!player){
+			// 	player = newestModel.players[0];
+			// }
+			if(mod.isValidMove(r,c)){
+				mod.makeMove(r,c,'X');
+				childBoard.push({
+				
+					key: JSON.stringify(mod),
+					val: {
+					parentModel:currentBoard,
+					isAiTurn:!gameBoard.val.isAiTurn
+				}
+				});
+			}
+		}
+	}return childBoard;
+});
+	
 }
-
-///////////////////////////////////////////////////////
 
 function flatten(itemList) {
 	return itemList.reduce(function(arr, list) {
-		return arr.concat(list);
+		return arr.concat(list);	
 	});
 }
 
@@ -62,6 +93,7 @@ function sort(kVPairList) {
 		else if(kVPair1.key > kVPair2.key) {
 			val = 1;
 		}
+		
 		return val;
 	});
 }
@@ -70,22 +102,33 @@ function plus(a, b) {
 	return a + parseInt(b);
 }
 
-////////////////////////////////////////
-function reducer(sortedKeyValuePairs) {
+function reducer1(sortedKeyValuePairs) {
 	var i = 0;
 	var keyValuesList = [];
 	while(i < sortedKeyValuePairs.length) {
 		var key = sortedKeyValuePairs[i].key;
 		var singleKeyValuesList = {key: key, values:[]};
 		while(i < sortedKeyValuePairs.length && key === sortedKeyValuePairs[i].key) {
-			singleKeyValuesList.values.push(sortedKeyValuePairs[i].value);
+			// console.log(sortedKeyValuePairs[i].val);
+			singleKeyValuesList.values.push(sortedKeyValuePairs[i].val);
 			i++;
 		}
-		keyValuesList.push({key: singleKeyValuesList.key, 
-		                    value: singleKeyValuesList.values.reduce(plus, 0)
-		                   });
+		keyValuesList.push( singleKeyValuesList);
 	}
+	
 	return keyValuesList;
+/*	
+	var singleKeyValuesList = {key: sortedKeyValuePairs[0].key, value:sortedKeyValuePairs[0].key};
+	sortedKeyValuePairs.forEach(function(kVPair) {
+		if(singleKeyValuesList.key != kVPair)
+		singleKeyValuePairs.push()
+	});
+*/
 }
 
-
+function mapper2(gameBoardList){
+	return gameBoardList.map(function(){
+		
+	});
+	
+}//takes in the output from reducer1 
